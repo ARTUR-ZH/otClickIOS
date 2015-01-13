@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyIOS", "CompanyIOS\CompanyIOS.csproj", "{1F187D15-FF76-4D2E-B366-5EC265B9956F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+		Distirbution|iPhone = Distirbution|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Debug|iPhone.Build.0 = Debug|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Distirbution|iPhone.ActiveCfg = Distirbution|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Distirbution|iPhone.Build.0 = Distirbution|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Release|iPhone.ActiveCfg = Release|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Release|iPhone.Build.0 = Release|iPhone
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{1F187D15-FF76-4D2E-B366-5EC265B9956F}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = CompanyIOS\CompanyIOS.csproj
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileFormatDefault
+		$0.VersionControlPolicy = $2
+		$2.inheritsSet = Mono
+	EndGlobalSection
+EndGlobal

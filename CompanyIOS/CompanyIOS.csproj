@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{1F187D15-FF76-4D2E-B366-5EC265B9956F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>CompanyIOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>CompanyIOS</AssemblyName>
+    <TargetFrameworkIdentifier>Xamarin.iOS</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>i386</MtouchArch>
+    <MtouchUseSGen>true</MtouchUseSGen>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <IpaPackageName>
+    </IpaPackageName>
+    <BuildIpa>true</BuildIpa>
+    <MtouchUseSGen>true</MtouchUseSGen>
+    <MtouchLink>None</MtouchLink>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <BuildIpa>true</BuildIpa>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <IpaPackageName>
+    </IpaPackageName>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <DefineConstants>__MOBILE__;__IOS__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Distirbution|iPhone' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Distirbution</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>87bb8c24-9470-4eec-b67f-e242c2473dbd</CodesignProvision>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+    <BundleResource Include="Resources\1.png" />
+    <BundleResource Include="Resources\1а.png" />
+    <BundleResource Include="Resources\2.png" />
+    <BundleResource Include="Resources\2а.png" />
+    <BundleResource Include="Resources\3.png" />
+    <BundleResource Include="Resources\3а.png" />
+    <BundleResource Include="Resources\background.png" />
+    <BundleResource Include="Resources\buttongraph.png" />
+    <BundleResource Include="Resources\все.png" />
+    <BundleResource Include="Resources\качество_а.png" />
+    <BundleResource Include="Resources\качество_б.png" />
+    <BundleResource Include="Resources\логин.png" />
+    <BundleResource Include="Resources\пароль.png" />
+    <BundleResource Include="Resources\сервис_а.png" />
+    <BundleResource Include="Resources\сервис_б.png" />
+    <BundleResource Include="Resources\стоимость_а.png" />
+    <BundleResource Include="Resources\стоимость_б.png" />
+    <BundleResource Include="Resources\флажочичек.png" />
+    <BundleResource Include="Resources\логотип.png" />
+    <BundleResource Include="Resources\tel.png" />
+    <BundleResource Include="Resources\стрелка.png" />
+    <BundleResource Include="Resources\триугла.png" />
+    <BundleResource Include="Resources\Icon-60%402x.png" />
+    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="RELEASE-NOTES.txt" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Helper\ErrosHelper.cs" />
+    <Compile Include="Helper\GraphicsCallback.cs" />
+    <Compile Include="Helper\HttpServiceConn.cs" />
+    <Compile Include="Helper\LoginHelper.cs" />
+    <Compile Include="Helper\md5securitycobject.cs" />
+    <Compile Include="Helper\ServiceCallbackHelper.cs" />
+    <Compile Include="Helper\TokensHelper.cs" />
+    <Compile Include="Helper\TokenValidation.cs" />
+    <Compile Include="Helper\WhatServiceWork.cs" />
+    <Compile Include="GraphicsController.cs" />
+    <Compile Include="GraphicsController.designer.cs">
+      <DependentUpon>GraphicsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHerlpers\LoginPage_TextFields.cs" />
+    <Compile Include="UIHerlpers\LoginPage_TextFields.designer.cs">
+      <DependentUpon>LoginPage_TextFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHerlpers\Button_Login.cs" />
+    <Compile Include="UIHerlpers\Button_Login.designer.cs">
+      <DependentUpon>Button_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHerlpers\TopMenu_Button.cs" />
+    <Compile Include="UIHerlpers\TopMenu_Button.designer.cs">
+      <DependentUpon>TopMenu_Button.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHerlpers\Services_Button.cs" />
+    <Compile Include="UIHerlpers\Services_Button.designer.cs">
+      <DependentUpon>Services_Button.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHerlpers\Statisti_button.cs" />
+    <Compile Include="UIHerlpers\Statisti_button.designer.cs">
+      <DependentUpon>Statisti_button.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHerlpers\Comments_Button.cs" />
+    <Compile Include="UIHerlpers\Comments_Button.designer.cs">
+      <DependentUpon>Comments_Button.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHerlpers\Rate_button.cs" />
+    <Compile Include="UIHerlpers\Rate_button.designer.cs">
+      <DependentUpon>Rate_button.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\RatesHelper.cs" />
+    <Compile Include="RateController.cs" />
+    <Compile Include="RateController.designer.cs">
+      <DependentUpon>RateController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHerlpers\RateTableViewStyle.cs" />
+    <Compile Include="UIHerlpers\RateTableVIewCellStyle.cs" />
+    <Compile Include="LoginController.cs" />
+    <Compile Include="LoginController.designer.cs">
+      <DependentUpon>LoginController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommentsController.cs" />
+    <Compile Include="CommentsController.designer.cs">
+      <DependentUpon>CommentsController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\CommentsHelper.cs" />
+    <Compile Include="Helper\DataResource.cs" />
+    <Compile Include="Helper\InnerDataResourceHelperForComments.cs" />
+    <Compile Include="UIHerlpers\CircleCommentsView.cs" />
+    <Compile Include="UIHerlpers\GraphicsViewWorker.cs" />
+    <Compile Include="Helper\NumericExtensions.cs" />
+    <Compile Include="UIHerlpers\CommentsTableViewStyle.cs" />
+    <Compile Include="UIHerlpers\clickedButtonAtIndex.cs" />
+    <Compile Include="UIHerlpers\LoadingOverlay.cs" />
+    <Compile Include="UIHerlpers\KeyChain.cs" />
+    <Compile Include="CommentsTextViewController.cs" />
+    <Compile Include="CommentsTextViewController.designer.cs">
+      <DependentUpon>CommentsTextViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Months.cs" />
+    <Compile Include="UIHerlpers\ButtonViewGraph.cs" />
+    <Compile Include="UIHerlpers\CommentsTableSourceFill.cs" />
+    <Compile Include="UIHerlpers\RateTableSourceFill.cs" />
+    <Compile Include="CraphicViewWindowClass.cs" />
+    <Compile Include="CraphicViewWindowClass.designer.cs">
+      <DependentUpon>CraphicViewWindowClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\CompaniesResource.cs" />
+    <Compile Include="UIHerlpers\ComapniesTableView.cs" />
+    <Compile Include="UIHerlpers\CompaniesTableCell.cs" />
+    <Compile Include="UIHerlpers\CompaniesTableFill.cs" />
+    <Compile Include="CompaniesControl.cs" />
+    <Compile Include="CompaniesControl.designer.cs">
+      <DependentUpon>CompaniesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIHerlpers\CommentsStyleCell.cs" />
+    <Compile Include="Helper\TypeNintConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\" />
+    <Folder Include="UIHerlpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="MainStoryBoard.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>
