@@ -44,12 +44,9 @@ namespace CompanyIOS
 		public override async void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			btnMonth.TouchUpInside += btnTopMenuTouch;
-			btnQuarter.TouchUpInside += btnTopMenuTouch;
-			btnHalfYear.TouchUpInside += btnTopMenuTouch;
-			btnYear.TouchUpInside += btnTopMenuTouch;
+			TopMenuEvents (true,btnMonth,btnQuarter,btnHalfYear,btnYear);
+			ClickServicesEvents (true, btnCost, btnQuality, btnService, btnAll);		
 			btnCost.TouchUpInside += btnOneTouch;
-
 			btnQuality.TouchUpInside += btnTwoTouch;
 			btnService.TouchUpInside += btnThreeTouch;
 			btnAll.TouchUpInside += btnFourTouch;
@@ -69,7 +66,58 @@ namespace CompanyIOS
 			gest.Direction = UISwipeGestureRecognizerDirection.Right;
 			gest.AddTarget (() => MoveBack (gest));
 			MainBackGroubd.AddGestureRecognizer (gest);
-			ServiceWindow.BackgroundColor = new UIColor (246, 246, 246, 1);
+		}
+
+		public override void ViewDidUnload ()
+		{
+			base.ViewDidUnload ();
+			TopMenuEvents (false,btnMonth,btnQuarter,btnHalfYear,btnYear);
+			ClickServicesEvents (false, btnCost, btnQuality, btnService, btnAll);
+			btnCost.TouchUpInside -= btnOneTouch;
+			btnQuality.TouchUpInside -= btnTwoTouch;
+			btnService.TouchUpInside -= btnThreeTouch;
+			btnAll.TouchUpInside -= btnFourTouch;
+		}
+
+		void TopMenuEvents(bool add, params UIButton[] buttons)
+		{
+			if (add) {
+				foreach (var item in buttons) {
+					item.TouchUpInside += btnTopMenuTouch;
+				}
+			} else {
+				foreach (var item in buttons) {
+					item.TouchUpInside -= btnTopMenuTouch;
+				}
+			}
+		}
+
+		void ClickServicesEvents(bool add, params UIButton[] buttons)
+		{
+			if (add) {
+				foreach (var item in buttons) {
+					item.TouchDown += ChangeBackground;
+					item.TouchDragExit += ChangeBackgroundBack;
+				}
+			} else {
+				foreach (var item in buttons) {
+					item.TouchDown -= ChangeBackground;
+					item.TouchDragExit -= ChangeBackgroundBack;
+				}
+			}
+		}
+
+		void ChangeBackgroundBack (object sender, EventArgs e)
+		{
+			UIButton but = sender as UIButton;
+			but.BackgroundColor = UIColor.FromRGB (246, 246, 246);
+		}
+
+
+		void ChangeBackground (object sender, EventArgs e)
+		{
+			UIButton but = sender as UIButton;
+			but.BackgroundColor = UIColor.FromRGB (227, 209, 230);
 		}
 
 		void CreateButtonForGraphics (params UIButton[] buttons)
@@ -80,6 +128,7 @@ namespace CompanyIOS
 					buttons [i].TitleEdgeInsets = new UIEdgeInsets(20,0,0,0);
 					buttons [i].SetTitle (text, UIControlState.Normal);
 					buttons [i].TitleLabel.TextAlignment = UITextAlignment.Left;
+					//buttons [i].TitleLabel.back
 					buttons [i].TitleLabel.LineBreakMode = UILineBreakMode.WordWrap;
 					buttons [i].SetTitleColor (UIColor.FromRGB (150, 87, 162), UIControlState.Normal);
 					buttons [i].BackgroundColor = UIColor.FromRGB (246, 246, 246);
@@ -96,8 +145,8 @@ namespace CompanyIOS
 
 		void MoveBack (UISwipeGestureRecognizer gest)
 		{
-			if (gest.State != (UIGestureRecognizerState.Cancelled | UIGestureRecognizerState.Failed
-				| UIGestureRecognizerState.Possible))
+			if (gest.State != UIGestureRecognizerState.Cancelled && gest.State != UIGestureRecognizerState.Failed &&
+				gest.State != UIGestureRecognizerState.Possible)
 			{
 				PerformSegue ("back", this);
 			}
@@ -134,6 +183,7 @@ namespace CompanyIOS
 			if (_data != null) {
 				if (_data.Item2.Resource != null) {		
 					CreateOsXMonthOrDaysVector (_data.Item2.Resource);
+					_buttonCostCliked = true;
 					but.Enabled = false;
 					if (UIControlState.Disabled == but.State) {
 						but.TitleEdgeInsets = new UIEdgeInsets (0, -46, 0, 0);
@@ -173,18 +223,38 @@ namespace CompanyIOS
 
 		void btnOneTouch (object sender, EventArgs e)
 		{
+			UIButton but = sender as UIButton;
+			but.BackgroundColor = UIColor.FromRGB (246, 246, 246);
+//			UIView.Animate(1,0,UIViewAnimationOptions.CurveEaseIn,
+//				() => { but.BackgroundColor = UIColor.FromRGB (227, 209, 230); },
+//				() => { but.BackgroundColor = UIColor.FromRGB (246, 246, 246); });
 			CostGraphicDraw ();	
 		}
 		void btnTwoTouch (object sender, EventArgs e)
 		{
+			UIButton but = sender as UIButton;
+			but.BackgroundColor = UIColor.FromRGB (246, 246, 246);
+//			UIView.Animate(0.5,0,UIViewAnimationOptions.CurveEaseIn,
+//				() => { but.BackgroundColor = UIColor.FromRGB (227, 209, 230); }, 
+//				() => { but.BackgroundColor = UIColor.FromRGB (246, 246, 246); });
 			QualityGraphicDraw ();	
 		}
 		void btnThreeTouch (object sender, EventArgs e)
 		{
+			UIButton but = sender as UIButton;
+			but.BackgroundColor = UIColor.FromRGB (246, 246, 246);
+//			UIView.Animate(0.1,0,UIViewAnimationOptions.Autoreverse,
+//				() => { but.BackgroundColor = UIColor.FromRGB (227, 209, 230); }, 
+//				() => { but.BackgroundColor = UIColor.FromRGB (246, 246, 246); });
 			ServiceGraphicDraw ();		
 		}
 		void btnFourTouch (object sender, EventArgs e)
 		{
+			UIButton but = sender as UIButton;
+			but.BackgroundColor = UIColor.FromRGB (246, 246, 246);
+//			UIView.Animate(0.1,0,UIViewAnimationOptions.Autoreverse,
+//				() => { but.BackgroundColor = UIColor.FromRGB (227, 209, 230); }, 
+//				() => { but.BackgroundColor = UIColor.FromRGB (246, 246, 246); });
 			AllGraphicDraw ();
 		}
 
