@@ -19,6 +19,7 @@ namespace CompanyIOS
 		private bool _buttonServiceCliked;
 		protected LoadingOverlay loadingOverlay;
 		private UIView osXview;
+		Tuple<string,QuestionHelper> _Questions;
 
 		public static nint Company {
 			get;
@@ -38,7 +39,7 @@ namespace CompanyIOS
 			_buttonServiceCliked = false;
 		}
 
-		public override void ViewDidLoad ()
+		public override async void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 			btnMonth.TouchUpInside += btnTopMenuTouch;
@@ -46,12 +47,14 @@ namespace CompanyIOS
 			btnHalfYear.TouchUpInside += btnTopMenuTouch;
 			btnYear.TouchUpInside += btnTopMenuTouch;
 			btnCost.TouchUpInside += btnServicesTouch;
+
 			btnQuality.TouchUpInside += btnServicesTouch;
 			btnService.TouchUpInside += btnServicesTouch;
 			btnAll.TouchUpInside += btnServicesTouch;
 
-
-
+			HttpServiceConn conn = new HttpServiceConn ();
+			_Questions = await conn.GetQuestions (Token, Company);
+			btnCost.SetTitle (_Questions.Item2.Resource [0].QName, UIControlState.Normal);
 			btnMonth.SendActionForControlEvents (UIControlEvent.TouchUpInside);
 			UISwipeGestureRecognizer gest = new UISwipeGestureRecognizer();
 			gest.Direction = UISwipeGestureRecognizerDirection.Right;
@@ -278,7 +281,7 @@ namespace CompanyIOS
 			}
 		}
 
-		void CreateOsXMonthOrDaysVector (System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, nfloat>> resource)
+		void CreateOsXMonthOrDaysVector (System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string>> resource)
 		{
 			nfloat xFirstStep = 40f;
 			nfloat xStep = (250) / (nfloat)(resource.Count - 1);

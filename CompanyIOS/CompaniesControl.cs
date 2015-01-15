@@ -37,7 +37,5 @@ namespace CompanyIOS
 			loadingOverlay.Hide ();
 
 		}
-
-
 	}
 }

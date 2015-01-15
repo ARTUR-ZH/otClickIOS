@@ -19,7 +19,7 @@ namespace CompanyIOS
 		}
 
 		[JsonProperty ("resource")]
-		public Dictionary<string, Dictionary<string, nfloat>> Resource {
+		public Dictionary<string, Dictionary<string, string>> Resource {
 			get;
 			set;
 		}

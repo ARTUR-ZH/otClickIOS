@@ -60,7 +60,7 @@ namespace CompanyIOS
 			var keyNumber = (int)((WhatServiceWork)Enum.Parse (typeof(WhatServiceWork), numberOfEnum));
 			string key = keyNumber.ToString ();
 			foreach (var keys in data.Resource) {
-				listOfData.Add (Tuple.Create (xFirstStep, _mainFrameHeight - _oSyStep * (keys.Value [key])));
+				listOfData.Add (Tuple.Create (xFirstStep, _mainFrameHeight - _oSyStep * ((nfloat)(Convert.ToInt32(keys.Value [key])))));
 				xFirstStep += xStep;
 			}
 			nint c = 0;

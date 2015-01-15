@@ -188,7 +188,7 @@ namespace CompanyIOS
 					text = text.Replace(']',' ');
 					text = text.Replace('[',' ');
 
-					rate = JsonConvert.DeserializeObject<CompaniesResource> (text);
+					rate =  JsonConvert.DeserializeObject<CompaniesResource> (text,new NintConverter());
 				}
 
 				if (rate == null) {
@@ -237,6 +237,49 @@ namespace CompanyIOS
 				return Tuple.Create ("",dataString);
 			} catch (Exception ex) {
 				return Tuple.Create (ex.Message, new CommentsHelper (){ Status = "error" });
+			}
+
+		}
+
+		public async Task<Tuple<string,QuestionHelper>> GetQuestions (string token,nint compId)
+		{
+			QuestionHelper QR;
+			try {
+				TokenValidation tokenVald = new TokenValidation ();
+				tokenVald.Token = token;
+				tokenVald.Objid = compId.ToString();
+				string createJson = JsonConvert.SerializeObject (tokenVald);
+				byte[] jsonByte = Encoding.UTF8.GetBytes (createJson);
+				var request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://www.otclick.com/applications/webservice/?r=TerminalApi/getQuestions"));
+				request.ContentType = "application/json; charset=utf-8";
+				request.Method = "POST";
+				request.Accept = "application/json";
+				request.ContentLength = jsonByte.Length;
+				using (Stream newStream = await request.GetRequestStreamAsync ()) {
+					newStream.Write (jsonByte, 0, jsonByte.Length);
+					newStream.Flush ();
+					newStream.Close ();
+				}
+				var task = request.GetResponseAsync ();
+
+				var resp = (HttpWebResponse)await task;
+				if (resp.StatusCode != HttpStatusCode.OK) {
+					return Tuple.Create ((string.Format (@"Error fetching data. Server returned status code: {0}", resp.StatusCode)), new QuestionHelper (){ Status = "error" });
+				}
+				using (StreamReader stream = new StreamReader (resp.GetResponseStream ())) {
+					Task<string> reader = stream.ReadToEndAsync ();
+					string text = (string)await reader;
+
+
+					QR = JsonConvert.DeserializeObject<QuestionHelper> (text);
+				}
+
+				if (QR == null) {
+					return Tuple.Create ("Error", new QuestionHelper (){ Status = "error" });
+				}
+				return Tuple.Create ("", QR);
+			} catch (Exception ex) {
+				return Tuple.Create (ex.Message, new QuestionHelper (){ Status = "error" }); 
 			}
 
 		}

@@ -245,6 +245,9 @@
     </Compile>
     <Compile Include="UIHerlpers\CommentsStyleCell.cs" />
     <Compile Include="Helper\TypeNintConverter.cs" />
+    <Compile Include="Helper\Extensions.cs" />
+    <Compile Include="Helper\PointsData.cs" />
+    <Compile Include="Helper\QuestionData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helper\" />
