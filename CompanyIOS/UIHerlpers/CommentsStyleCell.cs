@@ -3,6 +3,7 @@ using UIKit;
 using System.Drawing;
 using Foundation;
 using CoreGraphics;
+using System.Collections.Generic;
 
 namespace CompanyIOS
 {
@@ -17,17 +18,20 @@ namespace CompanyIOS
 		protected UITextView comment;
 		protected ClickedButtonAtIndex clickedButtonAtIndex;
 		CommentsController parent;
-		public CommentsStyleCell (string cellId, String left, string main, nint costNum, nint qualNum, nint servNum, string text, CommentsController parent) : base (UITableViewCellStyle.Default, cellId)
+		Dictionary<string,string> _Data;
+
+		public CommentsStyleCell (string cellId, String left, string main, string text, CommentsController parent, Dictionary<string,string> data) : base (UITableViewCellStyle.Default, cellId)
 		{
 			ClearsContextBeforeDrawing = false;
 			ContentView.BackgroundColor = UIColor.Clear;
 			SelectionStyle = UITableViewCellSelectionStyle.None;
 			ContentView.Frame = new CGRect (0, 0, 320, 200);
 			UserInteractionEnabled = true;
-			CreateStyles (left, main, costNum, qualNum, servNum, text, parent);
+			CreateStyles (left, main, text, parent, data);
+			_Data = data;
 		}
 
-		void CreateStyles (String left, string main, nint costNum, nint qualNum, nint servNum, string text, CommentsController parent)
+		void CreateStyles (String left, string main, string text, CommentsController parent, Dictionary<string,string> data)
 		{
 			this.parent = parent;
 			/*-----------Номер промокода----------*/
@@ -48,7 +52,6 @@ namespace CompanyIOS
 			verticalLine = new UIView ();
 			verticalLine.BackgroundColor = UIColor.FromRGB (239, 243, 243);
 			ContentView.Add (verticalLine);		
-
 
 			if (!string.IsNullOrWhiteSpace (main)) {
 				/*----------Номер телефона----------*/
@@ -126,7 +129,7 @@ namespace CompanyIOS
 			/*----------ГРАФИКИ----------*/
 			/*----------ГРАФИКИ----------*/
 			/*----------ГРАФИКИ----------*/
-			circleView = new CircleCommentsView (costNum, qualNum, servNum);
+			circleView = new CircleCommentsView (data);
 			ContentView.Add (circleView);
 
 			/*----------КОММЕНТАРИИ И КНОПКА ДЛЯ ПЕРЕХОДА----------*/
@@ -186,7 +189,7 @@ namespace CompanyIOS
 
 
 
-		public void UpdateCell (String left, string main, nint costNum, nint qualNum, nint servNum, string text, CommentsController parent)
+		public void UpdateCell (String left, string main, string text, CommentsController parent,Dictionary<string,string> data)
 		{	
 			showTextView.Hidden = true;
 			leftLabelNumber.Text = left;
@@ -200,7 +203,7 @@ namespace CompanyIOS
 			}			
 
 			circleView.RemoveFromSuperview ();
-			circleView = new CircleCommentsView (costNum, qualNum, servNum);
+			circleView = new CircleCommentsView (data);
 			ContentView.Add (circleView);
 
 			if (!string.IsNullOrWhiteSpace (text)) {
@@ -247,15 +250,15 @@ namespace CompanyIOS
 		public override void LayoutSubviews ()
 		{
 			base.LayoutSubviews ();
-			leftLabelNumber.Frame = new CGRect (ContentView.Frame.X, ContentView.Frame.Y, 54, 50);
-			mainButton.Frame = new CGRect (ContentView.Frame.X + 95, ContentView.Frame.Y, 225, 50);
+			leftLabelNumber.Frame = new CGRect (0, 0, 54, 50);
+			mainButton.Frame = new CGRect (95, 0, 225, 50);
 			verticalLine.Frame = new CGRect (55, 5, 1, 40);
 			horizontalLine.Frame = new CGRect (0, 50, 320, 1);
-			circleView.Frame = new CGRect (ContentView.Frame.X, ContentView.Frame.Y + 50, 320, 85);
+			circleView.Frame = new CGRect (0, 50, 320, _Data.Count * 55);
 			callImage.Frame = new CGRect (65, 15, 20, 20);
 			callArrow.Frame = new CGRect (300, 17.5f, 15, 15);
-			comment.Frame = new CGRect (20, 135, 280, 60);
-			showTextView.Frame = new CGRect (240, 180, 70, 20);
+			comment.Frame = new CGRect (20, _Data.Count * 55, 280, 60);
+			showTextView.Frame = new CGRect (240, _Data.Count * 55 + 60, 70, 20);
 		}
 
 		string IfMyCommentsWillTruncated (string text)

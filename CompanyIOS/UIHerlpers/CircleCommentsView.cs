@@ -2,29 +2,29 @@
 using UIKit;
 using CoreGraphics;
 using System.Drawing;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CompanyIOS
 {
 	public class CircleCommentsView : UIView
 	{
 
-		nint[] _degreeInnfloat;
+		List<string> _degreeInnfloat;
 		UIColor[] _color;
-		string[] _labelForServiceName;
-		nfloat[] _oSx;
+		List<string> _labelForServiceName;
 
-		public CircleCommentsView (nint cost, nint quality, nint service)
+		public CircleCommentsView (Dictionary<string,string> data)
 		{
 			_color = new UIColor[] {
 				UIColor.FromRGB (71, 201, 175),
 				UIColor.FromRGB (255, 110, 23),
 				UIColor.FromRGB (61, 147, 219)
 			};
-			_oSx = new nfloat[] { 50f, 156f, 262f };
 			BackgroundColor = UIColor.Clear;
 			Opaque = true;
-			_degreeInnfloat = new nint[] { cost, quality, service };
-			_labelForServiceName = new String[] { "Стоимость", "Качество", "Сервис" };
+			_degreeInnfloat = data.Values.ToList();
+			_labelForServiceName = GraphicsController.Questions.Select(x=>x.QName).ToList();
 			ClearsContextBeforeDrawing = false;		
 		}
 
@@ -38,26 +38,26 @@ namespace CompanyIOS
 		void DrawingTableCellArcs ()
 		{
 			CGPath path;
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < _labelForServiceName.Count; i++) {
 				using (var context = UIGraphics.GetCurrentContext ()) {
 					context.SetLineCap (CGLineCap.Butt);
 					context.SetLineWidth (4f);
 					path = new CGPath ();
-					path.AddArc (_oSx [i], 30, 20, ((nfloat)270).ToRadians (), ((nfloat)CountDegreeInPersentage (_degreeInnfloat [i])).ToRadians (), false);
+					path.AddArc (50, _labelForServiceName.Count * 30, 20, ((nfloat)270).ToRadians (), ((nfloat)CountDegreeInPersentage (Convert.ToInt32(_degreeInnfloat [i]))).ToRadians (), false);
 					context.SetAllowsAntialiasing (true);
 					context.AddPath (path);
 					context.SetFillColor (UIColor.Clear.CGColor);
 					context.SetStrokeColor (_color [i].CGColor);
 					context.DrawPath (CGPathDrawingMode.FillStroke);
 					path = new CGPath ();
-					path.AddArc (_oSx [i], 30, 18, 0, ((nfloat)360).ToRadians (), false);
+					path.AddArc (50, 30, 18, 0, ((nfloat)360).ToRadians (), false);
 					context.SetLineWidth (1f);
 					context.AddPath (path);
 					context.SetStrokeColor (UIColor.FromRGB (239, 243, 243).CGColor);
 					context.DrawPath (CGPathDrawingMode.FillStroke);
 				}
 				UILabel labelForServiceName = new UILabel () {
-					Frame = new CGRect ((nfloat)i * (106.6f - 2f), 50f, 106, 30),
+					Frame = new CGRect (120, _labelForServiceName.Count * 55 , 200, 30),
 					Font = UIFont.FromName ("HelveticaNeue-Light", 12f),
 					TextAlignment = UITextAlignment.Center,
 					TextColor = UIColor.Gray,
@@ -65,12 +65,12 @@ namespace CompanyIOS
 					Text = _labelForServiceName [i]
 				};
 				UILabel labelForPersentage = new UILabel () {
-					Frame = new CGRect (_oSx [i] - 15, 15f, 30, 30),
+					Frame = new CGRect (35, _labelForServiceName.Count * 15, 30, 30),
 					Font = UIFont.FromName ("HelveticaNeue-Bold", 12f),
 					TextAlignment = UITextAlignment.Center,
 					TextColor = UIColor.Gray,
 					BackgroundColor = UIColor.Clear,
-					Text = _degreeInnfloat [i].ToString ()
+					Text = _degreeInnfloat [i]
 				};
 				Add (labelForPersentage);
 				Add (labelForServiceName);
@@ -92,9 +92,6 @@ namespace CompanyIOS
 			}
 			if (_labelForServiceName != null) {
 				_labelForServiceName = null;
-			}
-			if (_oSx != null) {
-				_oSx = null;
 			}
 		}
 

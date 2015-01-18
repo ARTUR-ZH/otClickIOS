@@ -33,6 +33,11 @@ namespace CompanyIOS
 			set;
 		}
 
+		public static List<QuestionData> Questions {
+			get;
+			set;
+		}
+
 		public GraphicsController (IntPtr handle) : base (handle)
 		{
 			_buttonAllCliked = false;
@@ -53,7 +58,8 @@ namespace CompanyIOS
 
 			HttpServiceConn conn = new HttpServiceConn ();
 			try {
-				_Questions = await conn.GetQuestions (Token, Company);			
+				_Questions = await conn.GetQuestions (Token, Company);
+				Questions = _Questions.Item2.Resource;
 				CreateButtonForGraphics (btnCost,btnQuality,btnService,btnAll);
 			} catch (Exception ex) {
 				UIAlertView error = new UIAlertView ("Ошибка", ex.Message, null, "Закрыть", null);

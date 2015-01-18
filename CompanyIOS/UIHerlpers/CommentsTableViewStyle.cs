@@ -20,7 +20,6 @@ namespace CompanyIOS
 			AllowsSelection = true;
 			AllowsMultipleSelection = false;
 			SeparatorColor = UIColor.FromRGB (239, 243, 243);
-			RowHeight = 210;
 			SeparatorInset = UIEdgeInsets.Zero;
 			DelaysContentTouches = true;
 			CanCancelContentTouches = true;

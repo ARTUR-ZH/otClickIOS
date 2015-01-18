@@ -248,6 +248,7 @@
     <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Helper\PointsData.cs" />
     <Compile Include="Helper\QuestionData.cs" />
+    <Compile Include="Helper\NewsModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helper\" />

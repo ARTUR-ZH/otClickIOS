@@ -210,7 +210,7 @@ namespace CompanyIOS
 				newToken.Objid = GraphicsController.Company.ToString();
 				string tokenJson = JsonConvert.SerializeObject (newToken);
 				byte[] tokenByte = Encoding.UTF8.GetBytes (tokenJson);
-				var request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getComments"));
+				var request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getComments2"));
 				request.ContentType = "application/json; charset=utf-8";
 				request.Method = "POST";
 				request.Accept = "application/json";
@@ -281,8 +281,43 @@ namespace CompanyIOS
 			} catch (Exception ex) {
 				return Tuple.Create (ex.Message, new QuestionHelper (){ Status = "error" }); 
 			}
-
 		}
+//		public async Task<Tuple<string,QuestionHelper>> GetNews (string token,nint compId)
+//		{
+//			QuestionHelper QR;
+//			try {
+//				var request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://www.otclick.com/applications/webservice/?r=TerminalApi/getQuestions"));
+//				request.ContentType = "application/json; charset=utf-8";
+//				request.Method = "POST";
+//				request.Accept = "application/json";
+//				request.ContentLength = jsonByte.Length;
+//				using (Stream newStream = await request.GetRequestStreamAsync ()) {
+//					newStream.Write (jsonByte, 0, jsonByte.Length);
+//					newStream.Flush ();
+//					newStream.Close ();
+//				}
+//				var task = request.GetResponseAsync ();
+//
+//				var resp = (HttpWebResponse)await task;
+//				if (resp.StatusCode != HttpStatusCode.OK) {
+//					return Tuple.Create ((string.Format (@"Error fetching data. Server returned status code: {0}", resp.StatusCode)), new QuestionHelper (){ Status = "error" });
+//				}
+//				using (StreamReader stream = new StreamReader (resp.GetResponseStream ())) {
+//					Task<string> reader = stream.ReadToEndAsync ();
+//					string text = (string)await reader;
+//
+//
+//					QR = JsonConvert.DeserializeObject<QuestionHelper> (text);
+//				}
+//
+//				if (QR == null) {
+//					return Tuple.Create ("Error", new QuestionHelper (){ Status = "error" });
+//				}
+//				return Tuple.Create ("", QR);
+//			} catch (Exception ex) {
+//				return Tuple.Create (ex.Message, new QuestionHelper (){ Status = "error" }); 
+//			}
+//
 	}
 }
 

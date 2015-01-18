@@ -17,8 +17,20 @@ namespace CompanyIOS
 			get;
 			set;
 		}
+
+		[JsonProperty("comment")]
+		public string Comment {
+			get;
+			set;
+		}
+		[JsonProperty("phone")]
+		public string Phone {
+			get;
+			set;
+		}
+
 		[JsonProperty("data")]
-		public InnerDataResourceHelperForComments Data {
+		public List<string> Data {
 			get;
 			set;
 		}
