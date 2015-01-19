@@ -22,10 +22,10 @@ namespace CompanyIOS
 			return tableItems.Count;
 		}
 
-		public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
-		{
-			throw new System.NotImplementedException ();
-		}
+//		public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+//		{
+//			throw new System.NotImplementedException ();
+//		}
 
 		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 		{
@@ -33,9 +33,9 @@ namespace CompanyIOS
 			CommentsStyleCell cell = tableView.DequeueReusableCell (cellIdentifier) as CommentsStyleCell;
 			// if there are no cells to reuse, create a new one
 			if (cell == null)
-				//cell = new CommentsStyleCell (cellIdentifier, tableItems [indexPath.Row].Promocode, tableItems [indexPath.Row].Phone, tableItems [indexPath.Row].Comment, parentController, tableItems [indexPath.Row].Data);
+				cell = new CommentsStyleCell (cellIdentifier, tableItems [indexPath.Row].Promocode, tableItems [indexPath.Row].Phone, tableItems [indexPath.Row].Comment, parentController, tableItems [indexPath.Row].Data);
 			else {
-				//cell.UpdateCell (tableItems [indexPath.Row].Promocode, tableItems [indexPath.Row].Phone, tableItems [indexPath.Row].Comment, parentController, tableItems [indexPath.Row].Data);
+				cell.UpdateCell (tableItems [indexPath.Row].Promocode, tableItems [indexPath.Row].Phone, tableItems [indexPath.Row].Comment, parentController, tableItems [indexPath.Row].Data);
 			}
 			return cell;
 		}

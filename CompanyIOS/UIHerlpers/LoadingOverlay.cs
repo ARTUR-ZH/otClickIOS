@@ -15,8 +15,8 @@ namespace CompanyIOS
 		public LoadingOverlay (CGRect frame) : base (frame)
 		{
 			
-			// configurable binint			BackgroundColor = UIColor.Black;
-			Alpha = 0.75f;
+			BackgroundColor = UIColor.Black;
+			Alpha = (nfloat)0.75;
 			AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
 
 			nfloat labelHeight = 22;
@@ -37,20 +37,7 @@ namespace CompanyIOS
 			AddSubview (activitySpinner);
 			activitySpinner.StartAnimating ();
 
-			// create and configure the "Loading Data" label
-			loadingLabel = new UILabel (new CGRect (
-				centerX - (labelWidth / 2),
-				centerY + 20,
-				labelWidth,
-				labelHeight
-			));
-			loadingLabel.BackgroundColor = UIColor.Clear;
-			loadingLabel.TextColor = UIColor.White;
-			loadingLabel.Text = "Загрузка...";
-			loadingLabel.TextAlignment = UITextAlignment.Center;
-			loadingLabel.AutoresizingMask = UIViewAutoresizing.FlexibleMargins;
-			AddSubview (loadingLabel);
-				
+			// create and configure the "Loading Data" label				
 		}
 
 		/// <summary>
@@ -59,7 +46,7 @@ namespace CompanyIOS
 		public void Hide ()
 		{
 			UIView.Animate (
-				0.75f, // duration
+				0.75, // duration
 				() => {
 					Alpha = 0;
 				},

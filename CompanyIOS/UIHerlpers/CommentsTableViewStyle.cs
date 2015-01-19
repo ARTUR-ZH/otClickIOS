@@ -19,6 +19,7 @@ namespace CompanyIOS
 			SectionFooterHeight = 0;
 			AllowsSelection = true;
 			AllowsMultipleSelection = false;
+			RowHeight = GraphicsController.Questions.Count * 60 + 110;
 			SeparatorColor = UIColor.FromRGB (239, 243, 243);
 			SeparatorInset = UIEdgeInsets.Zero;
 			DelaysContentTouches = true;

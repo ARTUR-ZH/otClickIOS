@@ -43,37 +43,43 @@ namespace CompanyIOS
 					context.SetLineCap (CGLineCap.Butt);
 					context.SetLineWidth (4f);
 					path = new CGPath ();
-					path.AddArc (50, _labelForServiceName.Count * 30, 20, ((nfloat)270).ToRadians (), ((nfloat)CountDegreeInPersentage (Convert.ToInt32(_degreeInnfloat [i]))).ToRadians (), false);
+					path.AddArc (30, ((i * 2)+1) * 30, 20, ((nfloat)270).ToRadians (), ((nfloat)CountDegreeInPersentage (Convert.ToInt32(_degreeInnfloat [i]))).ToRadians (), false);
 					context.SetAllowsAntialiasing (true);
 					context.AddPath (path);
 					context.SetFillColor (UIColor.Clear.CGColor);
 					context.SetStrokeColor (_color [i].CGColor);
 					context.DrawPath (CGPathDrawingMode.FillStroke);
 					path = new CGPath ();
-					path.AddArc (50, 30, 18, 0, ((nfloat)360).ToRadians (), false);
+					path.AddArc (30, ((i * 2)+1) * 30, 18, 0, ((nfloat)360).ToRadians (), false);
 					context.SetLineWidth (1f);
 					context.AddPath (path);
 					context.SetStrokeColor (UIColor.FromRGB (239, 243, 243).CGColor);
 					context.DrawPath (CGPathDrawingMode.FillStroke);
 				}
 				UILabel labelForServiceName = new UILabel () {
-					Frame = new CGRect (120, _labelForServiceName.Count * 55 , 200, 30),
+					Frame = new CGRect (60, i * 60 , 200, 60),
 					Font = UIFont.FromName ("HelveticaNeue-Light", 12f),
-					TextAlignment = UITextAlignment.Center,
+					TextAlignment = UITextAlignment.Left,
 					TextColor = UIColor.Gray,
+					LineBreakMode = UILineBreakMode.WordWrap,
+					Lines = 2,
 					BackgroundColor = UIColor.Clear,
 					Text = _labelForServiceName [i]
 				};
 				UILabel labelForPersentage = new UILabel () {
-					Frame = new CGRect (35, _labelForServiceName.Count * 15, 30, 30),
+					Frame = new CGRect (15, ((i * 4)+1) * 15, 30, 30),
 					Font = UIFont.FromName ("HelveticaNeue-Bold", 12f),
 					TextAlignment = UITextAlignment.Center,
 					TextColor = UIColor.Gray,
 					BackgroundColor = UIColor.Clear,
 					Text = _degreeInnfloat [i]
 				};
+				UIView horizontalLine = new UIView ();
+				horizontalLine.Frame = new CGRect (60, (i + 1) * 60, 320, 1);
+				horizontalLine.BackgroundColor = UIColor.FromRGB (239, 243, 243);
 				Add (labelForPersentage);
 				Add (labelForServiceName);
+				Add (horizontalLine);
 				if (path != null) {
 					path.Dispose ();
 				}

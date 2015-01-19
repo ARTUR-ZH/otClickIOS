@@ -193,14 +193,19 @@ namespace CompanyIOS
 		{	
 			showTextView.Hidden = true;
 			leftLabelNumber.Text = left;
-			if (!string.IsNullOrWhiteSpace(main)) {
+			if (!string.IsNullOrWhiteSpace (main)) {
 				mainButton.Hidden = false;
 				callImage.Hidden = false;
 				callArrow.Hidden = false;
 				mainButton.SetTitle (main, UIControlState.Normal);
 				mainButton.TouchUpInside -= TouchPhoneNumber;
 				mainButton.TouchUpInside += TouchPhoneNumber;
-			}			
+			} else {
+				mainButton.Hidden = true;
+				callImage.Hidden = true;
+				callArrow.Hidden = true;
+				mainButton.TouchUpInside -= TouchPhoneNumber;
+			}
 
 			circleView.RemoveFromSuperview ();
 			circleView = new CircleCommentsView (data);
@@ -251,21 +256,20 @@ namespace CompanyIOS
 		{
 			base.LayoutSubviews ();
 			leftLabelNumber.Frame = new CGRect (0, 0, 54, 50);
-			mainButton.Frame = new CGRect (95, 0, 225, 50);
-			verticalLine.Frame = new CGRect (55, 5, 1, 40);
+			mainButton.Frame = new CGRect (100, 0, 200, 50);
+			verticalLine.Frame = new CGRect (60, 5, 1, 40);
 			horizontalLine.Frame = new CGRect (0, 50, 320, 1);
-			circleView.Frame = new CGRect (0, 50, 320, _Data.Count * 55);
-			callImage.Frame = new CGRect (65, 15, 20, 20);
+			circleView.Frame = new CGRect (0, 50, 320, _Data.Count * 60);
+			callImage.Frame = new CGRect (70, 15, 20, 20);
 			callArrow.Frame = new CGRect (300, 17.5f, 15, 15);
-			comment.Frame = new CGRect (20, _Data.Count * 55, 280, 60);
-			showTextView.Frame = new CGRect (240, _Data.Count * 55 + 60, 70, 20);
+			comment.Frame = new CGRect (20, _Data.Count * 60 + 50, 280, 60);
+			showTextView.Frame = new CGRect (240, _Data.Count * 60 + 60, 70, 20);
 		}
 
 		string IfMyCommentsWillTruncated (string text)
 		{
 			return text = string.Format (text.Substring (0, 115) + "...");
 		}
-
 	}
 }
 

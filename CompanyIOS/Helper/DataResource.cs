@@ -30,7 +30,7 @@ namespace CompanyIOS
 		}
 
 		[JsonProperty("data")]
-		public List<string> Data {
+		public Dictionary<string,string> Data {
 			get;
 			set;
 		}

@@ -4,6 +4,7 @@ using UIKit;
 using System.CodeDom.Compiler;
 using CoreGraphics;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CompanyIOS
 {
@@ -131,10 +132,10 @@ namespace CompanyIOS
 			for (int i = 0; i < buttons.Length; i++) {
 				try {
 					string text = _Questions.Item2.Resource [i].QName;
-					buttons [i].TitleEdgeInsets = new UIEdgeInsets(20,0,0,0);
+					buttons [i].TitleEdgeInsets = new UIEdgeInsets(0,20,0,0);
 					buttons [i].SetTitle (text, UIControlState.Normal);
 					buttons [i].TitleLabel.TextAlignment = UITextAlignment.Left;
-					//buttons [i].TitleLabel.back
+					buttons [i].VerticalAlignment = UIControlContentVerticalAlignment.Center;
 					buttons [i].TitleLabel.LineBreakMode = UILineBreakMode.WordWrap;
 					buttons [i].SetTitleColor (UIColor.FromRGB (150, 87, 162), UIControlState.Normal);
 					buttons [i].BackgroundColor = UIColor.FromRGB (246, 246, 246);

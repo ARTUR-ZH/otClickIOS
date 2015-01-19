@@ -71,5 +71,43 @@ namespace CompanyIOS
 			return objectType is nint;
 		}
 	}
+
+	public class DictionStringConverter : JsonConverter
+	{
+		public override bool CanWrite
+		{
+			get { return false; }
+		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			throw new NotSupportedException();
+		}
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			if (reader.TokenType == JsonToken.Null)
+				return null;
+
+			var valueType = objectType.GetGenericArguments()[1];
+			var intermediateDictionaryType = typeof(Dictionary<,>).MakeGenericType(typeof(string), valueType);
+			var intermediateDictionary = (IDictionary)Activator.CreateInstance(intermediateDictionaryType);
+			serializer.Populate(reader, intermediateDictionary);
+
+			var finalDictionary = (IDictionary)Activator.CreateInstance(objectType);
+			foreach (DictionaryEntry pair in intermediateDictionary)
+				finalDictionary.Add(pair.Key, pair.Value);
+
+			return finalDictionary;
+		}
+
+		public override bool CanConvert(Type objectType)
+		{
+			return objectType.Is(typeof(IDictionary<,>)) &&
+				objectType.GetGenericArguments()[0].Is(typeof(string)); 
+		}
+	}
+
+
 }
 

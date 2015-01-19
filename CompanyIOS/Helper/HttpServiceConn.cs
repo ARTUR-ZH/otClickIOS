@@ -228,7 +228,7 @@ namespace CompanyIOS
 				using (StreamReader reader = new StreamReader(response.GetResponseStream ())) {
 					Task<string> textReader = reader.ReadToEndAsync ();
 					string textJson = (string)await textReader;
-					dataString = JsonConvert.DeserializeObject<CommentsHelper> (textJson);
+					dataString = JsonConvert.DeserializeObject<CommentsHelper> (textJson, new DictionStringConverter());
 
 				}
 				if (dataString == null) {
