@@ -11,7 +11,7 @@ namespace CompanyIOS
 {
 	partial class LoginController : UIViewController
 	{
-		protected int _keyboardOffset;
+		protected nint _keyboardOffset;
 		private SecRecord existingRec;
 		protected LoadingOverlay loadingOverlay;
 
@@ -65,7 +65,7 @@ namespace CompanyIOS
 		private void CreateLeftView (string png, UITextField textField)
 		{
 			UIImageView viewLeftOverlay = new UIImageView (new UIImage (png));
-			viewLeftOverlay.Frame = new RectangleF (0, 0, 35, 15);
+			viewLeftOverlay.Frame = new CGRect (0, 0, 35, 15);
 			viewLeftOverlay.ContentMode = UIViewContentMode.ScaleAspectFit;
 			viewLeftOverlay.BackgroundColor = UIColor.Clear;		
 			textField.LeftView = viewLeftOverlay;
@@ -108,9 +108,9 @@ namespace CompanyIOS
 			CGRect rect = this.View.Frame;
 
 			if (b) {
-				rect.Y -= (float)_keyboardOffset;//				
+				rect.Y -= (nfloat)_keyboardOffset;//				
 			} else {
-				rect.Y += (float)_keyboardOffset;//				
+				rect.Y += (nfloat)_keyboardOffset;//				
 			}
 			this.View.Frame = rect;
 
@@ -159,7 +159,7 @@ namespace CompanyIOS
 			} else {
 				HttpServiceConn newconn = new HttpServiceConn ();
 				string md5hash = md5securitycobject.ComputeHash (txtLogin.Text + txtPassword.Text);
-				loadingOverlay = new LoadingOverlay (new System.Drawing.RectangleF (0, 0, 320, 568));
+				loadingOverlay = new LoadingOverlay (new CGRect (0, 0, 320, 568));
 				View.Add (loadingOverlay);
 				data = await newconn.WebRequestServiceAsync (md5hash, txtLogin.Text, txtPassword.Text);
 				loadingOverlay.Hide ();

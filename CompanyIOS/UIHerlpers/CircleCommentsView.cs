@@ -19,7 +19,8 @@ namespace CompanyIOS
 			_color = new UIColor[] {
 				UIColor.FromRGB (71, 201, 175),
 				UIColor.FromRGB (255, 110, 23),
-				UIColor.FromRGB (61, 147, 219)
+				UIColor.FromRGB (61, 147, 219),
+				UIColor.FromRGB (51, 72, 93)
 			};
 			BackgroundColor = UIColor.Clear;
 			Opaque = true;

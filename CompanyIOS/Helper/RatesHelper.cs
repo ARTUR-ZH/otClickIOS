@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CompanyIOS
 {
-	public class RatesHelper
+	public class NewsHelper
 	{
 		[JsonProperty ("status")]
 		public string Status {
@@ -19,7 +19,7 @@ namespace CompanyIOS
 		}
 
 		[JsonProperty ("resource")]
-		public Dictionary<nint, string> Resource {
+		public Dictionary<int, NewsData> Resource {
 			get;
 			set;
 		}

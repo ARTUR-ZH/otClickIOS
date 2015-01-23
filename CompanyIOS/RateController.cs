@@ -39,20 +39,16 @@ namespace CompanyIOS
 			HttpServiceConn conn = new HttpServiceConn ();
 			loadingOverlay = new LoadingOverlay (new CGRect (MainBackground.Frame.X, MainBackground.Frame.Y, MainBackground.Frame.Width, MainBackground.Frame.Height - BottomMenu.Frame.Height));
 			Add (loadingOverlay);
-			var rate = await conn.GetRating (GraphicsController.Token);
-			List<string> data = new List<string> ();
+			var rate = await conn.GetNews ();
+			List<NewsData> data = new List<NewsData> ();
 			foreach (var item in rate.Item2.Resource) {
 				data.Add (item.Value);
 			}
-			for (int i = 0; i < data.Count; i++) {
-				if (data [i].ToUpper ().Contains ("Моя компания".ToUpper ())) {
-					index = i + 1;
-				}
-			}
 
-			this.NavigationItem.Title = string.Format ("Ваш рейтинг: {0} из {1}", index, data.Count);
+
+			this.NavigationItem.Title = "Новости";
 			table.Bounces = true;
-			table.Source = new RateTableSourceFill (data);
+			table.Source = new RateTableSourceFill (data,this);
 			Add (table);
 			Add (loadingOverlay);
 			loadingOverlay.Hide ();

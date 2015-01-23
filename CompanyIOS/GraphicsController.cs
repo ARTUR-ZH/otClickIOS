@@ -41,10 +41,6 @@ namespace CompanyIOS
 
 		public GraphicsController (IntPtr handle) : base (handle)
 		{
-			_buttonAllCliked = false;
-			_buttonCostCliked = false;
-			_buttonQualityCliked = false;
-			_buttonServiceCliked = false;
 		}
 
 		public override async void ViewDidLoad ()
@@ -84,6 +80,8 @@ namespace CompanyIOS
 			btnQuality.TouchUpInside -= btnTwoTouch;
 			btnService.TouchUpInside -= btnThreeTouch;
 			btnAll.TouchUpInside -= btnFourTouch;
+
+			btnCost.SendActionForControlEvents (UIControlEvent.TouchUpInside);
 		}
 
 		void TopMenuEvents(bool add, params UIButton[] buttons)
@@ -132,22 +130,32 @@ namespace CompanyIOS
 			for (int i = 0; i < buttons.Length; i++) {
 				try {
 					string text = _Questions.Item2.Resource [i].QName;
-					buttons [i].TitleEdgeInsets = new UIEdgeInsets(0,20,0,0);
+					buttons [i].TitleEdgeInsets = new UIEdgeInsets(0,10,0,0);
 					buttons [i].SetTitle (text, UIControlState.Normal);
 					buttons [i].TitleLabel.TextAlignment = UITextAlignment.Left;
 					buttons [i].VerticalAlignment = UIControlContentVerticalAlignment.Center;
 					buttons [i].TitleLabel.LineBreakMode = UILineBreakMode.WordWrap;
+					buttons [i].TitleLabel.Lines = 4;
 					buttons [i].SetTitleColor (UIColor.FromRGB (150, 87, 162), UIControlState.Normal);
 					buttons [i].BackgroundColor = UIColor.FromRGB (246, 246, 246);
-					buttons [i].Font = UIFont.FromName (@"Helvetica-Light", 12);
+					buttons [i].Font = UIFont.FromName (@"Helvetica-Light", 11);
 				} catch (ArgumentOutOfRangeException) {
 					buttons [i].SetTitle (string.Empty, UIControlState.Normal);
 					buttons [i].SetTitleColor (UIColor.FromRGB (150, 87, 162), UIControlState.Normal);
 					buttons [i].BackgroundColor = UIColor.FromRGB (246, 246, 246);
-					buttons [i].Font = UIFont.FromName (@"Helvetica-Light", 12);
+					buttons [i].Font = UIFont.FromName (@"Helvetica-Light", 11);
 					buttons [i].Enabled = false;
 				}
 			}
+		}
+
+		private void CreateLeftView (string png, UITextField textField)
+		{
+			UIImageView viewLeftOverlay = new UIImageView (new UIImage (png));
+			viewLeftOverlay.Frame = new CGRect (0, 0, 35, 15);
+			viewLeftOverlay.ContentMode = UIViewContentMode.ScaleAspectFit;
+			viewLeftOverlay.BackgroundColor = UIColor.Clear;		
+			textField.LeftView = viewLeftOverlay;
 		}
 
 		void MoveBack (UISwipeGestureRecognizer gest)
@@ -190,7 +198,6 @@ namespace CompanyIOS
 			if (_data != null) {
 				if (_data.Item2.Resource != null) {		
 					CreateOsXMonthOrDaysVector (_data.Item2.Resource);
-					_buttonCostCliked = true;
 					but.Enabled = false;
 					if (UIControlState.Disabled == but.State) {
 						but.TitleEdgeInsets = new UIEdgeInsets (0, -46, 0, 0);
@@ -225,7 +232,6 @@ namespace CompanyIOS
 					error.Show ();
 				}
 			} 
-
 		}
 
 		void btnOneTouch (object sender, EventArgs e)
@@ -236,6 +242,9 @@ namespace CompanyIOS
 //				() => { but.BackgroundColor = UIColor.FromRGB (227, 209, 230); },
 //				() => { but.BackgroundColor = UIColor.FromRGB (246, 246, 246); });
 			CostGraphicDraw ();	
+			but.SetImage (UIImage.FromBundle ("1chek.png"), UIControlState.Selected);
+			but.ImageEdgeInsets = new UIEdgeInsets (0, 10, 50, 10);
+			but.Selected = _buttonCostCliked;
 		}
 		void btnTwoTouch (object sender, EventArgs e)
 		{
@@ -245,6 +254,9 @@ namespace CompanyIOS
 //				() => { but.BackgroundColor = UIColor.FromRGB (227, 209, 230); }, 
 //				() => { but.BackgroundColor = UIColor.FromRGB (246, 246, 246); });
 			QualityGraphicDraw ();	
+			but.SetImage (UIImage.FromBundle ("2chek.png"), UIControlState.Selected);
+			but.ImageEdgeInsets = new UIEdgeInsets (0, 10, 50, 10);
+			but.Selected = _buttonQualityCliked;
 		}
 		void btnThreeTouch (object sender, EventArgs e)
 		{
@@ -253,7 +265,11 @@ namespace CompanyIOS
 //			UIView.Animate(0.1,0,UIViewAnimationOptions.Autoreverse,
 //				() => { but.BackgroundColor = UIColor.FromRGB (227, 209, 230); }, 
 //				() => { but.BackgroundColor = UIColor.FromRGB (246, 246, 246); });
-			ServiceGraphicDraw ();		
+			ServiceGraphicDraw ();	
+			but.SetImage (UIImage.FromBundle ("3chek.png"), UIControlState.Selected);
+			but.ImageEdgeInsets = new UIEdgeInsets (0, 10, 50, 10);
+			but.Selected = _buttonServiceCliked;
+				
 		}
 		void btnFourTouch (object sender, EventArgs e)
 		{
@@ -263,11 +279,14 @@ namespace CompanyIOS
 //				() => { but.BackgroundColor = UIColor.FromRGB (227, 209, 230); }, 
 //				() => { but.BackgroundColor = UIColor.FromRGB (246, 246, 246); });
 			AllGraphicDraw ();
+			but.SetImage (UIImage.FromBundle ("4chek.png"), UIControlState.Selected);
+			but.ImageEdgeInsets = new UIEdgeInsets (0, 10, 50, 10);
+			but.Selected = _buttonAllCliked;
+
 		}
 
 		void CostGraphicDraw ()
 		{
-
 			if (_buttonCostCliked) {
 				_cost.DeleteTouchView ();
 				_cost.RemoveFromSuperview ();
@@ -284,7 +303,7 @@ namespace CompanyIOS
 			if (_buttonQualityCliked) {
 				_quality.DeleteTouchView ();
 				_quality.RemoveFromSuperview ();
-				_buttonQualityCliked = false;			
+				_buttonQualityCliked = false;
 			} else {
 				_quality = new GraphicsViewWorker (_data.Item2, WhatServiceWork.Quality, UIColor.FromRGB (255, 110, 23), GraphicViewWindow.Bounds,GraphicViewWindow);
 				GraphicViewWindow.AddSubview (_quality);
@@ -297,7 +316,7 @@ namespace CompanyIOS
 			if (_buttonServiceCliked) {
 				_service.DeleteTouchView ();
 				_service.RemoveFromSuperview ();
-				_buttonServiceCliked = false;			
+				_buttonServiceCliked = false;
 			} else {
 				_service = new GraphicsViewWorker (_data.Item2, WhatServiceWork.Service, UIColor.FromRGB (61, 147, 219), GraphicViewWindow.Bounds,GraphicViewWindow);
 				GraphicViewWindow.AddSubview (_service);
@@ -307,14 +326,14 @@ namespace CompanyIOS
 
 		void AllGraphicDraw ()
 		{
-			if (_buttonServiceCliked) {
+			if (_buttonAllCliked) {
 				_all.DeleteTouchView ();
 				_all.RemoveFromSuperview ();
 				_buttonAllCliked = false;
 			} else {
-				_service = new GraphicsViewWorker (_data.Item2, WhatServiceWork.Service, UIColor.FromRGB (61, 147, 219), GraphicViewWindow.Bounds,GraphicViewWindow);
-				GraphicViewWindow.AddSubview (_service);
-				_buttonAllCliked = true;			
+				_all = new GraphicsViewWorker (_data.Item2, WhatServiceWork.All, UIColor.FromRGB (51, 72, 93), GraphicViewWindow.Bounds,GraphicViewWindow);
+				GraphicViewWindow.AddSubview (_all);
+				_buttonAllCliked = true;
 			}
 		}
 

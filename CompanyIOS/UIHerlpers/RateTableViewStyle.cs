@@ -17,10 +17,11 @@ namespace CompanyIOS
 			AutoresizingMask = UIViewAutoresizing.All;
 			ScrollEnabled = true;
 			SectionFooterHeight = 0;
-			AllowsSelection = false;
+			AllowsSelection = true;
 			AllowsMultipleSelection = false;
-			SeparatorColor = UIColor.White;
-			RowHeight = 50;
+			SeparatorStyle = UITableViewCellSeparatorStyle.None;
+			SeparatorColor = UIColor.LightGray;
+			RowHeight = 100;
 			SeparatorInset = UIEdgeInsets.Zero;
 		}
 	}

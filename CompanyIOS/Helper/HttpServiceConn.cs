@@ -113,30 +113,21 @@ namespace CompanyIOS
 			}
 		}
 
-		public async Task<Tuple<string,RatesHelper>> GetRating (string token)
+		public async Task<Tuple<string,NewsHelper>> GetNews ()
 		{
-			RatesHelper rate;
+			NewsHelper news;
 			try {
-				TokenValidation tokenVald = new TokenValidation ();
-				tokenVald.Token = token;
-				tokenVald.Objid = GraphicsController.Company.ToString();
-				string createJson = JsonConvert.SerializeObject (tokenVald);
-				byte[] jsonByte = Encoding.UTF8.GetBytes (createJson);
-				var request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getRating"));
+				var request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getNews2"));
 				request.ContentType = "application/json; charset=utf-8";
 				request.Method = "POST";
 				request.Accept = "application/json";
-				request.ContentLength = jsonByte.Length;
+
 				using (Stream newStream = await request.GetRequestStreamAsync ()) {
-					newStream.Write (jsonByte, 0, jsonByte.Length);
-					newStream.Flush ();
-					newStream.Close ();
-				}
-				var task = request.GetResponseAsync ();
+				}				var task = request.GetResponseAsync ();
 				
 				var resp = (HttpWebResponse)await task;
 				if (resp.StatusCode != HttpStatusCode.OK) {
-					return Tuple.Create ((string.Format (@"Error fetching data. Server returned status code: {0}", resp.StatusCode)), new RatesHelper (){ Status = "error" });
+					return Tuple.Create ((string.Format (@"Error fetching data. Server returned status code: {0}", resp.StatusCode)), new NewsHelper (){ Status = "error" });
 				}
 				using (StreamReader stream = new StreamReader (resp.GetResponseStream ())) {
 					Task<string> reader = stream.ReadToEndAsync ();
@@ -145,15 +136,15 @@ namespace CompanyIOS
 					if (index > 0)
 						text = text.Substring (0, (int)index + 3);
 
-					rate = JsonConvert.DeserializeObject<RatesHelper> (text);
+					news = JsonConvert.DeserializeObject<NewsHelper> (text);
 				}
 			
-				if (rate == null) {
-					return Tuple.Create ("Error", new RatesHelper (){ Status = "error" });
+				if (news == null) {
+					return Tuple.Create ("Error", new NewsHelper (){ Status = "error" });
 				}
-				return Tuple.Create ("", rate);
+				return Tuple.Create ("", news);
 			} catch (Exception ex) {
-				return Tuple.Create (ex.Message, new RatesHelper (){ Status = "error" }); 
+				return Tuple.Create (ex.Message, new NewsHelper (){ Status = "error" }); 
 			}
 
 		}

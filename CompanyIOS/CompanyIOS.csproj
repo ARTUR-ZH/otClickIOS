@@ -147,6 +147,12 @@
     <BundleResource Include="Resources\Icon-60%402x.png" />
     <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\1chek.png" />
+    <BundleResource Include="Resources\2chek.png" />
+    <BundleResource Include="Resources\3chek.png" />
+    <BundleResource Include="Resources\4chek.png" />
+    <BundleResource Include="Resources\message.png" />
+    <BundleResource Include="Resources\message_dark.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -248,7 +254,8 @@
     <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Helper\PointsData.cs" />
     <Compile Include="Helper\QuestionData.cs" />
-    <Compile Include="Helper\NewsModel.cs" />
+    <Compile Include="Helper\NewsData.cs" />
+    <Compile Include="NewsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helper\" />
@@ -256,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryBoard.storyboard" />
+    <InterfaceDefinition Include="NewsController.xib" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
