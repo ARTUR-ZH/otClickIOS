@@ -81,7 +81,6 @@ namespace CompanyIOS
 			btnService.TouchUpInside -= btnThreeTouch;
 			btnAll.TouchUpInside -= btnFourTouch;
 
-			btnCost.SendActionForControlEvents (UIControlEvent.TouchUpInside);
 		}
 
 		void TopMenuEvents(bool add, params UIButton[] buttons)
@@ -345,7 +344,7 @@ namespace CompanyIOS
 			GraphicViewWindow.Add (osXview);
 			nfloat heightOfFrame = GraphicsViewWorker.CountFrameHeight(osXview.Frame.Height);
 			osXview.BackgroundColor = UIColor.Clear;
-			if (resource.Count < 15) {
+			if (resource.Values.Count < 15) {
 				foreach (var item in resource) {
 					UILabel label = new UILabel (new CGRect (xFirstStep - 12.5f, heightOfFrame, 25, 25));
 					label.TextAlignment = UITextAlignment.Center;

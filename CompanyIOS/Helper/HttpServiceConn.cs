@@ -67,16 +67,16 @@ namespace CompanyIOS
 				byte[] jsonencode = Encoding.UTF8.GetBytes (jsonser);
 				switch (dateof) {
 				case "Месяц":
-					request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getByMonth"));
+					request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getByMonth2"));
 					break;
 				case "Квартал":
-					request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getByQuarter"));
+					request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getByQuarter2"));
 					break;
 				case "Полугодие":
-					request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getByHalfyear"));
+					request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getByHalfyear2"));
 					break;
 				case "Год":
-					request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getByYear"));
+					request = (HttpWebRequest)WebRequest.Create (string.Format (@"http://188.225.32.223/applications/webservice/index.php?r=TerminalApi/getByYear2"));
 					break;
 				default:
 					return null;

@@ -34,9 +34,5 @@ namespace CompanyIOS
 			get;
 			set;
 		}
-
 	}
-
-
 }
-

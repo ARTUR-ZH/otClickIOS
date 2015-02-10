@@ -12,7 +12,7 @@ namespace CompanyIOS
 		protected UILabel leftLabelNumber;
 		protected UIButton mainButton, showTextView;
 		protected UIView verticalLine, horizontalLine;
-		protected UIImageView callImage, callArrow;
+		protected UIImageView callImage, callArrow, commentImage;
 		protected CircleCommentsView circleView;
 		protected nint cost, quality, service;
 		protected UITextView comment;
@@ -166,6 +166,11 @@ namespace CompanyIOS
 			}
 			ContentView.Add (comment);
 
+			commentImage = new UIImageView (new UIImage ("message_dark.png"));
+			commentImage.ContentMode = UIViewContentMode.ScaleAspectFit;
+			commentImage.BackgroundColor = UIColor.Clear;
+			ContentView.Add (commentImage);
+
 			showTextView = new UIButton () {
 				Font = UIFont.FromName ("HelveticaNeue-Light", 16f),
 				BackgroundColor = UIColor.Clear,
@@ -262,7 +267,8 @@ namespace CompanyIOS
 			circleView.Frame = new CGRect (0, 50, 320, _Data.Count * 60);
 			callImage.Frame = new CGRect (70, 15, 20, 20);
 			callArrow.Frame = new CGRect (300, 17.5f, 15, 15);
-			comment.Frame = new CGRect (20, _Data.Count * 60 + 50, 280, 60);
+			comment.Frame = new CGRect (60, _Data.Count * 60 + 50, 280, 60);
+			commentImage.Frame = new CGRect (20, _Data.Count * 60 + 50 + 20, 20, 20);
 			showTextView.Frame = new CGRect (240, _Data.Count * 60 + 60, 70, 20);
 		}
 
